@@ -6,7 +6,7 @@ const products = [
         'description': 'Handcrafted blue earrings',
         'category': 'jewelry',
         'price': 15.99,
-        'countInStock' : 1
+        'countInStock' : 0
     },
     {       
         'id': '2',
