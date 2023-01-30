@@ -6,47 +6,44 @@ import {Container, Image,ListGroup,Button,Card, ListGroupItem } from 'react-boot
 import products from '../products'
 import axios from 'axios'
 
-const ProductScreen=() => {
-    const params = useParams();
-    const {id} = params;
-    const product =products.find((product) => product.id === id);
+// import React from 'react'
 
-    const{image,name,price,description} = product
-// function ProductScreen({match}) {
-//     console.log(match)
-//     const [product, setProduct] = useState([])
+const ProductScreen = () => {
+    const{id} = useParams();
+    const [product, setProduct] = useState({})
     
-//     useEffect(()=>{
-//         async function fetchProducts(){
-//             const {data}= await axios.get(`/api/products/${match.params.id}`)
-//             setProduct(data)
-//         }
-//         fetchProducts()
-
-    // },[])
-
+    useEffect(() => {
+        axios.get(`/api/products/${id}`)
+        .then(response => {
+            console.log('this is the response', response)
+            setProduct(response.data)
+            // setProduct(response.data.price)
+            // setProduct(response.data.description)
+        })
+        .catch(error=>console.log(error))
+    },)
+  
     return (
-
         <div>
             
             <Link to='/' className='btn btn-dark my-3'>Go Back</Link>
                 <Row>
                     <Col md={8}>
-                        <img src={image} alt= {name} fluid/>
+                        <img height={500} width={500} src={product.image} alt= {product.image}/>
                     </Col>
         
             
             <Col md={2}>
                 <ListGroup variant='flush'>
                     <ListGroup.Item>
-                        <h3> {name}</h3>
+                        <h3> {product.name}</h3>
                     </ListGroup.Item>
                     <ListGroup.Item>
-                        Price: ${price}
+                        Price: ${product.price}
                     </ListGroup.Item>
                 </ListGroup>
                 <ListGroupItem>
-                Description: {description}
+                Description: {product.description}
                 </ListGroupItem>
             </Col>
         
@@ -57,7 +54,7 @@ const ProductScreen=() => {
                             <Row>
                                 <Col>price:</Col>
                                 <Col>
-                                    <strong>${price}</strong>
+                                    <strong>${product.price}</strong>
                                 </Col>
                             </Row>
                         </ListGroupItem>
@@ -78,10 +75,87 @@ const ProductScreen=() => {
             </Row>
             </div>
         
-    )
-}
-
-
-
+        
+  )
+};
 
 export default ProductScreen
+
+// const ProductScreen=() => {
+//     const params = useParams();
+//     const {id} = params;
+//     const product =products.find((product) => product.id === id);
+
+//     const{image,name,price,description} = product
+// function ProductScreen({id}) {
+//     const [product, setProduct] = useState([])
+    
+//     useEffect(()=>{
+//         async function fetchProducts(){
+//             const {data}= await axios.get(`/api/products/${id}`)
+//             setProduct(data)
+//         }
+//         fetchProducts()
+
+//     },[])
+
+//     return (
+
+        // <div>
+            
+        //     <Link to='/' className='btn btn-dark my-3'>Go Back</Link>
+        //         <Row>
+        //             <Col md={8}>
+        //                 <img src={image} alt= {name} fluid/>
+        //             </Col>
+        
+            
+        //     <Col md={2}>
+        //         <ListGroup variant='flush'>
+        //             <ListGroup.Item>
+        //                 <h3> {name}</h3>
+        //             </ListGroup.Item>
+        //             <ListGroup.Item>
+        //                 Price: ${price}
+        //             </ListGroup.Item>
+        //         </ListGroup>
+        //         <ListGroupItem>
+        //         Description: {description}
+        //         </ListGroupItem>
+        //     </Col>
+        
+        //     <Col md={2}>
+        //         <Card>
+        //             <ListGroup variant='flush'>
+        //                 <ListGroupItem>
+        //                     <Row>
+        //                         <Col>price:</Col>
+        //                         <Col>
+        //                             <strong>${price}</strong>
+        //                         </Col>
+        //                     </Row>
+        //                 </ListGroupItem>
+        //                 <ListGroupItem>
+        //                     <Row>
+        //                         <Col>Status:</Col>
+        //                         <Col>
+        //                             {product.countInStock> 0 ? 'In Stock' : 'Out of Stock'}
+        //                         </Col>
+        //                     </Row>
+        //                 </ListGroupItem>
+        //                 <ListGroupItem>
+        //                     <Button className='btn-block' disabled={product.countInStock=== 0} type='button'> Add to Cart</Button>
+        //                 </ListGroupItem>
+        //             </ListGroup>
+        //         </Card>
+        //     </Col>
+        //     </Row>
+        //     </div>
+        
+//     )
+// }
+
+
+
+
+// export default ProductScreen
