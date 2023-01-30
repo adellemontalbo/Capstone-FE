@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import {Routes, Route,HashRouter as Router} from 'react-router-dom';
+import {Routes, Route,BrowserRouter as Router} from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
