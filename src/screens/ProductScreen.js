@@ -23,7 +23,7 @@ const ProductScreen = () => {
         .catch(error=>console.log(error))
     },)
     const addToCartHandler = ()=>{
-       history.push 
+    //    history.push 
     }
     return (
         <div>
