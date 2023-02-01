@@ -1,42 +1,35 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState, useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Row, Col, Container, Image, ListGroup, Button, Card, Form } from 'react-bootstrap'
-import axios from 'axios'
+import { listProductDetails } from '../actions/productActions'
+// import axios from 'axios'
+
 
 
 const ProductScreen = () => {
-    const navigate = useNavigate();
-    const{id} = useParams();
-    const [product, setProduct] = useState({})
-    const [qty, setQty] = useState(1)
+    const{ id } = useParams();
+    const dispatch = useDispatch()
+    // const navigate = useNavigate();
+    const productDetails = useSelector(state => state.productDetails)
+    const { loading, error, product } = productDetails
 
     useEffect(() => {
-        axios.get(`/api/products/${id}`)
-        .then(response => {
-            // console.log('this is the response', response)
-            setProduct(response.data)
-            // setProduct(response.data.price)
-            // setProduct(response.data.description)
-        })
-        .catch(error=>console.log(error))
-    },[id])
+        dispatch(listProductDetails(id))
+    },[dispatch, id])
 
-    const addToCartHandler = () => {
-        console.log('Add to Cart:',id, qty )
-        navigate(`/cart/${id}?qty=${qty}`)
-    }
-    
     return (
         <div>
-            
             <Link to='/' className='btn btn-dark my-3'>Go Back</Link>
             <Row>
-                <Col md={6}>
-                    <img height={500} width={450} src={product.image} alt= {product.image}/>
+                <Col lg={5}>
+                    <Container>
+                    <img height={500} width={500} src={product.image} alt= {product.image}/>
+                    </Container>
                 </Col>
         
             
-                <Col md={3}>
+                <Col lg={3}>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
                             <h3>{product.name}</h3>
@@ -52,7 +45,7 @@ const ProductScreen = () => {
                     </ListGroup>
                 </Col>
         
-                <Col md={3}>
+                <Col lg={3}>
                     <Card>
                         <ListGroup variant='flush'>
                             <ListGroup.Item>
@@ -73,7 +66,7 @@ const ProductScreen = () => {
                                 </Row>
                             </ListGroup.Item>
 
-                            {product.countInStock > 0 && (
+                            {/* {product.countInStock > 0 && (
                                 <ListGroup.Item>
                                     <Row>
                                         <Col>Qty</Col>
@@ -98,7 +91,7 @@ const ProductScreen = () => {
                                 <Button 
                                 onClick={addToCartHandler} className='btn-block' 
                                 disabled={product.countInStock === 0} type='button'> Add To Cart</Button>
-                            </ListGroup.Item>
+                            </ListGroup.Item> */}
                         </ListGroup>
                     </Card>
                 </Col>
@@ -110,6 +103,33 @@ const ProductScreen = () => {
 };
 
 export default ProductScreen
+
+//before Redux:
+// const ProductScreen = () => {
+//     const navigate = useNavigate();
+//     const{id} = useParams();
+//     const [product, setProduct] = useState({})
+//     const [qty, setQty] = useState(1)
+
+//     useEffect(() => {
+//         axios.get(`/api/products/${id}`)
+//         .then(response => {
+//             // console.log('this is the response', response)
+//             setProduct(response.data)
+//             // setProduct(response.data.price)
+//             // setProduct(response.data.description)
+//         })
+//         .catch(error=>console.log(error))
+//     },[id])
+
+// const addToCartHandler = () => {
+//     console.log('Add to Cart:',id, qty )
+//     navigate(`/cart/${id}?qty=${qty}`)
+// }
+
+
+
+
 
 // const ProductScreen=() => {
 //     const params = useParams();
