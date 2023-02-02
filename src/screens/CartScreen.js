@@ -4,7 +4,7 @@ import { Link, useSearchParams, useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Image, Row, Col, ListGroup, Button, Card, Form, ListGroupItem } from 'react-bootstrap'
 import  Message  from '../components/Message'
-import { addToCart } from '../actions/cartActions'
+import { addToCart, removeFromCart } from '../actions/cartActions'
 
 function CartScreen() {
     const navigate = useNavigate();
@@ -21,10 +21,9 @@ function CartScreen() {
     		dispatch(addToCart(id, qty));
     		}
     		}, [dispatch, id, qty]);
-    
-    //FIX ME!!!        
+         
     const removeFromCartHandler = (id) => {
-        console.log(`remove ${id}`)
+        dispatch(removeFromCart(id))
     }
 
     const checkoutHandler = () => {
