@@ -8,15 +8,21 @@ import { listProductDetails } from '../actions/productActions'
 
 
 const ProductScreen = () => {
+    const [qty, setQty] = useState(1)
+
     const{ id } = useParams();
     const dispatch = useDispatch()
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const productDetails = useSelector(state => state.productDetails)
     const { loading, error, product } = productDetails
 
     useEffect(() => {
         dispatch(listProductDetails(id))
     },[dispatch, id])
+
+    const addToCartHandler = () => {
+        navigate(`/cart/${id}?qty=${qty}`)
+}
 
     return (
         <div>
@@ -66,7 +72,7 @@ const ProductScreen = () => {
                                 </Row>
                             </ListGroup.Item>
 
-                            {/* {product.countInStock > 0 && (
+                            {product.countInStock > 0 && (
                                 <ListGroup.Item>
                                     <Row>
                                         <Col>Qty</Col>
@@ -74,7 +80,8 @@ const ProductScreen = () => {
                                         <Form.Control
                                             as ="select"
                                             value={qty}
-                                            onChange={(e)=> setQty(e.target.value)}>
+                                            onChange={(e)=> setQty(e.target.value)}
+                                        >
                                             {
                                                 [...Array(product.countInStock).keys()].map((x)=>(
                                                     <option key={x+1} value={x+1}>
@@ -82,16 +89,16 @@ const ProductScreen = () => {
                                                     </option>
                                                 ))
                                             }   
-                                            </Form.Control>
+                                        </Form.Control>
                                         </Col>
                                     </Row>
                                 </ListGroup.Item>
                             )}
                             <ListGroup.Item>
                                 <Button 
-                                onClick={addToCartHandler} className='btn-block' 
-                                disabled={product.countInStock === 0} type='button'> Add To Cart</Button>
-                            </ListGroup.Item> */}
+                                    onClick={addToCartHandler} className='btn-block' 
+                                    disabled={product.countInStock === 0} type='button'> Add To Cart</Button>
+                            </ListGroup.Item>
                         </ListGroup>
                     </Card>
                 </Col>
@@ -122,11 +129,11 @@ export default ProductScreen
 //         .catch(error=>console.log(error))
 //     },[id])
 
+
 // const addToCartHandler = () => {
 //     console.log('Add to Cart:',id, qty )
 //     navigate(`/cart/${id}?qty=${qty}`)
 // }
-
 
 
 
