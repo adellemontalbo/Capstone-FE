@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { Link, useSearchParams, useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Image, Row, Col, ListGroup, Button, Card, Form, ListGroupItem } from 'react-bootstrap'
+import { Image, Row, Col, ListGroup, Button, Card, Form } from 'react-bootstrap'
 import  Message  from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 
@@ -31,6 +31,8 @@ function CartScreen() {
     }
 
     return (
+        <>
+        <Link to='/' className='btn btn-link'>Keep Shopping</Link>
         <Row>
             <Col md ={8}>
                 <h1>Shopping Cart</h1>
@@ -108,6 +110,7 @@ function CartScreen() {
             </Col>
             
         </Row>
+        </>
     )
 }
 
