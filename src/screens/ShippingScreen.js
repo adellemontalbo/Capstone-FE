@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 // import FormContainer from '../components/FormContainer'
 import { saveShippingAddress } from '../actions/cartActions' 
-import { CheckoutSteps } from '../components/CheckoutSteps'
+import  CheckoutSteps  from '../components/CheckoutSteps'
 
 function ShippingScreen() {
     const navigate = useNavigate();
@@ -27,10 +27,14 @@ function ShippingScreen() {
 
     //TO REMOVE WHEN I HAVE FORM CONTAINER:
     return(
-        <div>
-            {/* <CheckoutSteps step1 step2 /> */}
-            SHIPPING
-        </div>
+        <>
+    <div>
+    <CheckoutSteps step1 step2  />
+    </div>
+    <div>
+      SHIPPING
+    </div>
+    </>
     )}
 
 // TO ADD WHEN FORM CONTAINER MADE
