@@ -28,8 +28,8 @@ const ProductScreen = () => {
         <div>
             <Link to='/' className='btn btn-dark my-3'>Go Back</Link>
             <Row>
+                <Col>
                     <img height={500} width={500} src={product.image} alt= {product.image}/>
-                    <img height={500} width={450} src={product.image} alt= {product.image}/>
                 </Col>
         
             
