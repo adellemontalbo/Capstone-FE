@@ -22,7 +22,7 @@ export const initialState = {
     cart: { 
         cartItems: cartItemsFromStorage,
         shippingAddress: shippingAddressFromStorage,
-        userLogin:{userinfo:userInfoFromStorage}
+        userLogin:{ userinfo:userInfoFromStorage }
     }
 };
 
