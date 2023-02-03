@@ -3,7 +3,10 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Form,Button,Row,Col, FormGroup } from 'react-bootstrap'
 import {useDispatch,useSelector} from 'react-redux'
 import Message from '../components/Message'
+<<<<<<< HEAD
 import Loader from '../components/Loader'
+=======
+>>>>>>> 718dbe437c9329a3377266115063891542dc7f69
 import FormContainer from '../components/FormContainer'
 import { login } from '../actions/userActions'
 import { Redirect } from 'react-router-dom'
