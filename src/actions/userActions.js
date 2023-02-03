@@ -13,7 +13,7 @@ export const login = (email,password) => async(dispatch) => {
             }
         }
         const {data} = await axios.post('/api/user/login/'
-        {'username':email, 'password':password},
+        ,{'username':email, 'password':password},
         config
         )
         dispatch({
