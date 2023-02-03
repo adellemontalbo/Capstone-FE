@@ -20,13 +20,16 @@ function LoginScreen() {
     const userLogin = useSelector(state => state.userLogin)
     const {error,loading,userInfo} =userLogin
     const navigate = useNavigate()
-    useEffect(()=>{if(userInfo){navigate(redirect)}
+    
+    useEffect(()=>{
+        if(userInfo){
+            navigate(redirect)
+        }
 
     }, [navigate,userInfo,redirect])
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log('submitted')
         dispatch(login(email,password))
     }
     return (
