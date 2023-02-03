@@ -1,6 +1,4 @@
-This is a TEST commit
-<!-- Hello -->
-Another test
+Trini Treasures Ecommerce Website With Django + React
 
 
 # Getting Started with Create React App

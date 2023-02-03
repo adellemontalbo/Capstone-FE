@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Form,Button,Row,Col, FormGroup } from 'react-bootstrap'
 import {useDispatch,useSelector} from 'react-redux'
 import Message from '../components/Message'
-// import Loader from '../components/Loader'
+import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 import { login } from '../actions/userActions'
 import { Redirect } from 'react-router-dom'
@@ -35,6 +35,9 @@ function LoginScreen() {
     return (
     <FormContainer>
         <h1>Sign In</h1>
+
+        {error && <Message variant='danger'>{error}</Message>}
+        {loading && <Loader/>}
         <Form onSubmit={submitHandler}>
             <FormGroup controlId='email'>
                 <Form.Label> Email Address</Form.Label>
