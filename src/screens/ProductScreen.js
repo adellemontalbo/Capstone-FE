@@ -26,7 +26,7 @@ const ProductScreen = () => {
 
     return (
         <div>
-            <Link to='/' className='btn btn-dark my-3'>Go Back</Link>
+            <Link to='/' className='btn btn-link'>Go Back</Link>
             <Row>
                 <Col>
                     <img height={500} width={500} src={product.image} alt= {product.image}/>
@@ -40,11 +40,11 @@ const ProductScreen = () => {
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                            Price: ${product.price}
+                            <strong>Price: </strong>${product.price}
                         </ListGroup.Item>
                        
                         <ListGroup.Item>
-                            Description: {product.description}
+                        <strong>Description: </strong>{product.description}
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>
