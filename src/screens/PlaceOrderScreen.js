@@ -1,25 +1,58 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import  CheckoutSteps  from '../components/CheckoutSteps'
+import { createOrder } from '../actions/orderActions'
+import { ORDER_CREATE_RESET } from '../constants/orderConstants'
+
+//DOUBLE CHECK I NEED ID, USEPARAMS() AND THAT I NEED TO USE IT IN USE EFFECT
 
 function PlaceOrderScreen() {
+
+    const orderCreate = useSelector(state => state.orderCreate)
+    const { order, error, success } = orderCreate
+    
+    // const { id } = useParams();
+    //THIS NEEDS WORK
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const cart = useSelector(state => state.cart )
+
+
+    const cart = useSelector((state) => state.cart)
 
     cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
     cart.shippingPrice = (cart.itemsPrice > 100 ? 10 : 5).toFixed(2)
     cart.taxPrice = Number((0.08) * cart.itemsPrice).toFixed(2)
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
-
-    const placeOrder = () => {
-        console.log('Order placed')
+    
+    //NEED TO CHECK IF THIS WORKS - how to unchekc radio dial?
+    if(!cart.paymentMethod){
+        navigate('/payment')
     }
 
-    // const dispatch = useDispatch()
+    // useEffect(() =>{
+    //     if(success){
+    //     dispatch(ORDER_CREATE_RESET)
+    //     navigate(`/order/${order.id}`)
+    //     }
+    // }, [success, dispatch, navigate, order.id])
 
+    const placeOrder = () => {
+        dispatch(createOrder({
+            orderItems: cart.cartItems,
+            shippingAddress: cart.shippingAddress,
+            paymentMethod: cart.paymentMethod,
+            itemsPrice: cart.itemsPrice,
+            shippingPrice: cart.shippingPrice,
+            taxPrice: cart.taxPrice,
+            totalPrice: cart.totalPrice
+        }))
+        console.log('Order placed')
+        console.log(`this is my order:${order}`)
+    }
+    
 
   return (
     <div>
@@ -32,11 +65,11 @@ function PlaceOrderScreen() {
 
                     <p>
                         <strong>Shipping: </strong>
-                        {cart.shippingAdress.address},{cart.shippingAdress.city},
+                        {cart.shippingAddress.address},{cart.shippingAddress.city},
                         {' '}
-                        {cart.shippingAdress.postalCode}
+                        {cart.shippingAddress.postalCode}
                         {' '}
-                        {cart.shippingAdress.country}
+                        {cart.shippingAddress.country}
                     </p>
                 </ListGroup.Item>
 
@@ -114,9 +147,9 @@ function PlaceOrderScreen() {
                                 </Row>
                             </ListGroup.Item>
 
-                            {/* <ListGroup.Item>
+                            <ListGroup.Item>
                                     {error && <Message variant='danger'>{error}</Message>}
-                            </ListGroup.Item> */}
+                            </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Button 
