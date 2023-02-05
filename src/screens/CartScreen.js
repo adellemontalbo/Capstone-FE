@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { Link, useSearchParams, useParams, useNavigate } from 'react-router-dom'
+import { Link, useSearchParams, useParams, useNavigate, redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Image, Row, Col, ListGroup, Button, Card, Form } from 'react-bootstrap'
 import  Message  from '../components/Message'
@@ -26,10 +26,16 @@ function CartScreen() {
         dispatch(removeFromCart(id))
     }
 
+//NEED TO FIX THIS
     const checkoutHandler = () => {
-        // navigate('/login?redirect=shipping')
+        // navigate(`/login?redirect=shipping`)
         navigate('/shipping')
-    }
+        // if (!login) {
+        // redirect('/login?redirect=shipping')
+        // } else{
+            
+        }
+        
 
     return (
         <>

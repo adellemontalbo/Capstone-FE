@@ -11,13 +11,13 @@ import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 
 function PlaceOrderScreen() {
 
-    const orderCreate = useSelector(state => state.orderCreate)
+    const orderCreate = useSelector((state )=> state.orderCreate)
     const { order, error, success } = orderCreate
     
-    // const { id } = useParams();
+   
     //THIS NEEDS WORK
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
 
     const cart = useSelector((state) => state.cart)
@@ -32,6 +32,9 @@ function PlaceOrderScreen() {
         navigate('/payment')
     }
 
+    //Getting error: Uncaught TypeError: Cannot read property 'id' of undefined
+    //The problem is is the backend - not receiving back "order"
+    //"POST /api/orders/add/ HTTP/1.1" 500 116885
     // useEffect(() =>{
     //     if(success){
     //     dispatch(ORDER_CREATE_RESET)
