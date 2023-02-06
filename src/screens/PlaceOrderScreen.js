@@ -37,14 +37,15 @@ function PlaceOrderScreen() {
     //The problem is the backend - not receiving back "order"
     //"POST /api/orders/add/ HTTP/1.1" 500 116885 -RESOLVED: bug was in orderserializer in shippingAddress
 
-    
+
     // console.log(`this is my order:${order}`)
-    useEffect(() =>{
-        if(success){
-            navigate(`/order/${order.id}`)
-            dispatch(ORDER_CREATE_RESET)
-        }
-    }, [success])
+    //NEEDS WORK
+    // useEffect(() =>{
+    //     if(success){
+    //         navigate(`/order/${order.id}`)
+    //         dispatch(ORDER_CREATE_RESET)
+    //     }
+    // }, [success])
 
     const placeOrder = () => {
         dispatch(createOrder({
