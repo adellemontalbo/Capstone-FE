@@ -11,13 +11,13 @@ import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 
 function PlaceOrderScreen() {
 
-    const orderCreate = useSelector(state => state.orderCreate)
+    const orderCreate = useSelector((state )=> state.orderCreate)
     const { order, error, success } = orderCreate
     
-    // const { id } = useParams();
+   
     //THIS NEEDS WORK
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
 
     const cart = useSelector((state) => state.cart)
@@ -28,16 +28,24 @@ function PlaceOrderScreen() {
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
     
     //NEED TO CHECK IF THIS WORKS - how to unchekc radio dial?
-    if(!cart.paymentMethod){
-        navigate('/payment')
-    }
+    //Idon't think we need - we can get payment from storage
+    // if(!cart.paymentMethod){
+    //     navigate('/payment')
+    // }
 
+    //Getting error: Uncaught TypeError: Cannot read property 'id' of undefined
+    //The problem is the backend - not receiving back "order"
+    //"POST /api/orders/add/ HTTP/1.1" 500 116885 -RESOLVED: bug was in orderserializer in shippingAddress
+
+
+    // console.log(`this is my order:${order}`)
+    //NEEDS WORK
     // useEffect(() =>{
     //     if(success){
-    //     dispatch(ORDER_CREATE_RESET)
-    //     navigate(`/order/${order.id}`)
+    //         navigate(`/order/${order.id}`)
+    //         dispatch(ORDER_CREATE_RESET)
     //     }
-    // }, [success, dispatch, navigate, order.id])
+    // }, [success])
 
     const placeOrder = () => {
         dispatch(createOrder({
@@ -50,7 +58,6 @@ function PlaceOrderScreen() {
             totalPrice: cart.totalPrice
         }))
         console.log('Order placed')
-        console.log(`this is my order:${order}`)
     }
     
 
