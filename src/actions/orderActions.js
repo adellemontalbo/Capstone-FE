@@ -39,7 +39,7 @@ import {
 
         dispatch({
             type: CART_CLEAR_ITEMS,
-            payload: data
+            // payload: data
         })
 
         localStorage.removeItem('cartItems')

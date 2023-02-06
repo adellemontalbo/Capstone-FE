@@ -28,7 +28,7 @@ function CartScreen() {
 
 //NEED TO FIX THIS
     const checkoutHandler = () => {
-        // navigate(`/login?redirect=shipping`)
+        // navigate('/login?redirect=shipping')
         navigate('/shipping')
         // if (!login) {
         // redirect('/login?redirect=shipping')

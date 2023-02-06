@@ -28,19 +28,23 @@ function PlaceOrderScreen() {
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
     
     //NEED TO CHECK IF THIS WORKS - how to unchekc radio dial?
-    if(!cart.paymentMethod){
-        navigate('/payment')
-    }
+    //Idon't think we need - we can get payment from storage
+    // if(!cart.paymentMethod){
+    //     navigate('/payment')
+    // }
 
     //Getting error: Uncaught TypeError: Cannot read property 'id' of undefined
-    //The problem is is the backend - not receiving back "order"
-    //"POST /api/orders/add/ HTTP/1.1" 500 116885
-    // useEffect(() =>{
-    //     if(success){
-    //     dispatch(ORDER_CREATE_RESET)
-    //     navigate(`/order/${order.id}`)
-    //     }
-    // }, [success, dispatch, navigate, order.id])
+    //The problem is the backend - not receiving back "order"
+    //"POST /api/orders/add/ HTTP/1.1" 500 116885 -RESOLVED: bug was in orderserializer in shippingAddress
+
+    
+    // console.log(`this is my order:${order}`)
+    useEffect(() =>{
+        if(success){
+            navigate(`/order/${order.id}`)
+            dispatch(ORDER_CREATE_RESET)
+        }
+    }, [success])
 
     const placeOrder = () => {
         dispatch(createOrder({
@@ -53,7 +57,6 @@ function PlaceOrderScreen() {
             totalPrice: cart.totalPrice
         }))
         console.log('Order placed')
-        console.log(`this is my order:${order}`)
     }
     
 
