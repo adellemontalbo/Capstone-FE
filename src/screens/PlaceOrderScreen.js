@@ -26,16 +26,6 @@ function PlaceOrderScreen() {
     cart.shippingPrice = (cart.itemsPrice > 100 ? 10 : 5).toFixed(2)
     cart.taxPrice = Number((0.08) * cart.itemsPrice).toFixed(2)
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
-    
-    //NEED TO CHECK IF THIS WORKS - how to unchekc radio dial?
-    //Idon't think we need - we can get payment from storage
-    // if(!cart.paymentMethod){
-    //     navigate('/payment')
-    // }
-
-    //Getting error: Uncaught TypeError: Cannot read property 'id' of undefined
-    //The problem is the backend - not receiving back "order"
-    //"POST /api/orders/add/ HTTP/1.1" 500 116885 -RESOLVED: bug was in orderserializer in shippingAddress
 
 
     
