@@ -40,12 +40,12 @@ function PlaceOrderScreen() {
 
     // console.log(`this is my order:${order}`)
     //NEEDS WORK
-    // useEffect(() =>{
-    //     if(success){
-    //         navigate(`/order/${order.id}`)
-    //         dispatch(ORDER_CREATE_RESET)
-    //     }
-    // }, [success])
+    useEffect(() =>{
+        if(success){
+            navigate(`/order/${order.id}`)
+            dispatch(ORDER_CREATE_RESET)
+        }
+    }, [navigate,success, dispatch,order.id])
 
     const placeOrder = () => {
         dispatch(createOrder({
