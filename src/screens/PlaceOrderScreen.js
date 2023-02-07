@@ -38,14 +38,14 @@ function PlaceOrderScreen() {
     //"POST /api/orders/add/ HTTP/1.1" 500 116885 -RESOLVED: bug was in orderserializer in shippingAddress
 
 
-    // console.log(`this is my order:${order}`)
+    
     //NEEDS WORK
     useEffect(() =>{
         if(success){
             navigate(`/order/${order.id}`)
-            dispatch(ORDER_CREATE_RESET)
+            // dispatch({ type: ORDER_CREATE_RESET })
         }
-    }, [navigate,success, dispatch,order.id])
+    }, [success, navigate ])
 
     const placeOrder = () => {
         dispatch(createOrder({
@@ -59,6 +59,9 @@ function PlaceOrderScreen() {
         }))
         console.log('Order placed')
     }
+
+    // console.log(`this is my order:${order.id}`)
+    
     
 
   return (

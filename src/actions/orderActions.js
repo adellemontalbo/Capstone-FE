@@ -44,12 +44,12 @@ import {
             payload: data
         })
 
-        dispatch({
-            type: CART_CLEAR_ITEMS,
-            // payload: data
-        })
+        // dispatch({
+        //     type: CART_CLEAR_ITEMS,
+        //     payload: data
+        // })
 
-        localStorage.removeItem('cartItems')
+        // localStorage.removeItem('cartItems')
 
     } catch (error) {
         dispatch({
@@ -80,7 +80,7 @@ import {
             }
         }
         
-        const { data } = await axios.post(
+        const { data } = await axios.get(
             `/api/orders/${id}/`,
             config
         )

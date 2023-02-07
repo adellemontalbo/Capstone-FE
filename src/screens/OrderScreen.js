@@ -23,10 +23,16 @@ function OrderScreen() {
 
     useEffect(() => {
         if (!order || order.id !== Number(id)) {
-       
+            dispatch(getOrderDetails(id))
         }
     }, [dispatch, order, id])
 
+    // return(
+    //     <div>
+    //         {/* <h1>{order.id}</h1> */}
+    //         OrderScreen
+    //     </div>
+    // ) }
 
 
     return loading ? (
