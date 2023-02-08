@@ -18,7 +18,7 @@ function Header() {
         <Navbar bg="dark" variant='light' expand="lg" collapseOnSelect>
             <Container>
               <LinkContainer to={'/'}>
-                <Navbar.Brand>Trini Treasures</Navbar.Brand>
+                <Navbar.Brand><strong>🇹🇹 Trini Treasures 🇹🇹</strong></Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
