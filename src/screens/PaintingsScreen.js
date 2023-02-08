@@ -7,33 +7,37 @@ import Message from '../components/Message'
 import { listProducts } from '../actions/productActions'
 
 
-function HomeScreen() {
+function PaintingsScreen() {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)
     const { error, loading, products } = productList
+    const categoryproducts = products.filter(product => product.category === "Paintings")
+    console.log(categoryproducts)
         
     useEffect(()=>{
-        dispatch(listProducts())
+        dispatch(listProducts)
 
         },[])
+
+
  
 
     return (
         <div>
-            <h1>Our Latest Treasures</h1>
+            <h1> Paintings</h1>
             {loading ? <Loader />
                 : error ? <Message variant='danger'>{error}</Message>
                 :
                 <Row>
-                {products.map(product =>(
+                {categoryproducts.map(product =>(
                     <Col key ={product.id} sm ={12} md ={6} lg ={4} xl={3}>
                     <Product product ={product}/>
                     </Col>
                     ))}
             </Row>
-            }
+}
         </div>
     )
 }
 
-export default HomeScreen
+export default PaintingsScreen

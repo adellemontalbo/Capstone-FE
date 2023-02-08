@@ -1,8 +1,7 @@
 import React from 'react'
-import { Nav,Navbar,Container,Row, NavDropdown } from 'react-bootstrap'
+import { Nav,Navbar,Container, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { logout } from '../actions/userActions'
 
 function Header() {
@@ -24,6 +23,12 @@ function Header() {
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="mr-auto">
+                  <LinkContainer to={'/jewelry'}>
+                    <Nav.Link> Jewelry</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to={'/paintings'}>
+                    <Nav.Link> Paintings</Nav.Link>
+                  </LinkContainer>
                   <LinkContainer to={'/about'}>
                     <Nav.Link> About</Nav.Link>
                   </LinkContainer>

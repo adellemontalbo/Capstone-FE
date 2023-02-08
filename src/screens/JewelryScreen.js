@@ -1,110 +1,42 @@
-import React,{useState, useEffect} from 'react'
+import React ,{ useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams, useNavigate } from 'react-router-dom'
-import { Row, Col, Container, Image, ListGroup, Button, Card, Form } from 'react-bootstrap'
-import { listProductDetails } from '../actions/productActions'
-// import axios from 'axios'
+import {Row, Col} from 'react-bootstrap'
+import Product from '../components/Product'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
+import { listProducts } from '../actions/productActions'
 
 
-
-const JewelryScreen = () => {
-    const [qty, setQty] = useState(1)
-
-    const{ id } = useParams();
-    const dispatch = useDispatch()
-    const navigate = useNavigate();
-    const productDetails = useSelector(state => state.productDetails)
-    const { loading, error, product } = productDetails
-
-    useEffect(() => {
-        dispatch(listProductDetails(id))
-    },[dispatch, id])
-
-    const addToCartHandler = () => {
-        navigate(`/cart/${id}?qty=${qty}`)
-}
-
-    return (
-        <div>
-            <Link to='/' className='btn btn-link'>Go Back</Link>
-            <Row>
-                <Col>
-                    <img height={500} width={500} src={product.image} alt= {product.image}/>
-                </Col>
-        
+function JewelryScreen() {
+        const dispatch = useDispatch()
+        const productList = useSelector(state => state.productList)
+        const { error, loading, products } = productList
+        const categoryproducts = products.filter(product => product.category === "Jewelry")
+        console.log(categoryproducts)
             
-                <Col lg={3}>
-                    <ListGroup variant='flush'>
-                        <ListGroup.Item>
-                            <h3>{product.name}</h3>
-                        </ListGroup.Item>
-
-                        <ListGroup.Item>
-                            <strong>Price: </strong>${product.price}
-                        </ListGroup.Item>
-                       
-                        <ListGroup.Item>
-                        <strong>Description: </strong>{product.description}
-                        </ListGroup.Item>
-                    </ListGroup>
-                </Col>
-        
-                <Col lg={3}>
-                    <Card>
-                        <ListGroup variant='flush'>
-                            <ListGroup.Item>
-                                <Row>
-                                    <Col>Price:</Col>
-                                    <Col>
-                                        <strong>${product.price}</strong>
-                                    </Col>
-                                </Row>
-                            </ListGroup.Item>
-
-                            <ListGroup.Item>
-                                <Row>
-                                    <Col>Status:</Col>
-                                    <Col>
-                                    {product.countInStock> 0 ? 'In Stock' : 'Out of Stock'}
-                                    </Col>
-                                </Row>
-                            </ListGroup.Item>
-
-                            {product.countInStock > 0 && (
-                                <ListGroup.Item>
-                                    <Row>
-                                        <Col>Qty</Col>
-                                        <Col xs ='auto' className='my-1'>
-                                        <Form.Control
-                                            as ="select"
-                                            value={qty}
-                                            onChange={(e)=> setQty(e.target.value)}
-                                        >
-                                            {
-                                                [...Array(product.countInStock).keys()].map((x)=>(
-                                                    <option key={x+1} value={x+1}>
-                                                        {x+1}
-                                                    </option>
-                                                ))
-                                            }   
-                                        </Form.Control>
-                                        </Col>
-                                    </Row>
-                                </ListGroup.Item>
-                            )}
-                            <ListGroup.Item>
-                                <Button 
-                                    onClick={addToCartHandler} className='btn-block' 
-                                    disabled={product.countInStock === 0} type='button'> Add To Cart</Button>
-                            </ListGroup.Item>
-                        </ListGroup>
-                    </Card>
-                </Col>
-            </Row>
-        </div>
-        
-        
-  )
-};
+        useEffect(()=>{
+            dispatch(listProducts)
+    
+            },[])
+    
+    
+        return (
+            <div>
+                <h1>Jewelry</h1>
+                {loading ? <Loader />
+                : error ? <Message variant='danger'>{error}</Message>
+                :
+                    <Row>
+                    {categoryproducts.map(product =>(
+                        <Col key ={product.id} sm ={12} md ={6} lg ={4} xl={3}>
+                        <Product product ={product}/>
+                        </Col>
+                        ))}
+                </Row>
+}
+            </div>
+        )
+    }
+    
 
 export default JewelryScreen
