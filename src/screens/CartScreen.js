@@ -16,6 +16,8 @@ function CartScreen() {
 	const cart = useSelector((state) => state.cart);
 	const { cartItems } = cart;
 
+    const userLogin = useSelector((state) => state.userLogin);
+
     useEffect(() => {
     	if (id) {
     		dispatch(addToCart(id, qty));
@@ -29,13 +31,12 @@ function CartScreen() {
 //NEED TO FIX THIS
     const checkoutHandler = () => {
         // navigate('/login?redirect=shipping')
-        navigate('/shipping')
-        // if (!login) {
-        // redirect('/login?redirect=shipping')
-        // } else{
-            
+        if (!userLogin) {
+        navigate('/login')
+        } else {
+        navigate('/shipping')          
         }
-        
+    }
 
     return (
         <>
