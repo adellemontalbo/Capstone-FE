@@ -6,7 +6,9 @@ import {USER_UPDATE_PROFILE_REQUEST ,USER_UPDATE_PROFILE_SUCCESS, USER_UPDATE_PR
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
 import axios from 'axios'
 
-// const BASE_DIR="http://127.0.0.1:8000"
+// const kBaseUrl="http://127.0.0.1:8000"
+
+const kBaseUrl=process.env.REACT_APP_BE_URL
 
 export const login = (email,password) => async(dispatch) => {
     try{
@@ -18,8 +20,8 @@ export const login = (email,password) => async(dispatch) => {
                 'Content-type':'application/json'
             }
         }
-        const {data} = await axios.post('/api/users/login/'
-        // const {data} = await axios.post(`${BASE_DIR}/api/users/login/`
+        // const {data} = await axios.post('/api/users/login/'
+        const {data} = await axios.post(`${kBaseUrl}/api/users/login/`
         ,{'username':email, 'password':password},
         config
         )
@@ -58,9 +60,9 @@ export const register = (name, email,password) => async(dispatch) => {
                 'Content-type':'application/json'
             }
         }
-        const {data} = await axios.post('/api/users/register/'
+        // const {data} = await axios.post('/api/users/register/'
 
-        // const {data} = await axios.post(`${BASE_DIR}/api/users/register/`
+        const {data} = await axios.post(`${kBaseUrl}/api/users/register/`
         ,{'name':name,'email':email, 'password':password},
         config
         )
@@ -100,8 +102,8 @@ export const getUserDetails = (id) => async(dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        const {data} = await axios.get(`/api/users/${id}/`
-        // const {data} = await axios.get(`${BASE_DIR}/api/users/${id}/`
+        // const {data} = await axios.get(`/api/users/${id}/`
+        const {data} = await axios.get(`${kBaseUrl}/api/users/${id}/`
         ,
         config
         )
@@ -136,8 +138,8 @@ export const updateUserProfile = (user) => async(dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        const {data} = await axios.put(`/api/users/profile/update/`,
-        // const {data} = await axios.put(`${BASE_DIR}/api/users/profile/update/`,
+        // const {data} = await axios.put(`/api/users/profile/update/`,
+        const {data} = await axios.put(`${kBaseUrl}/api/users/profile/update/`,
         user,
         config
         )

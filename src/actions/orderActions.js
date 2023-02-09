@@ -17,8 +17,8 @@ import {
  } from "../constants/orderConstants"
 
  import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
-
-//  const BASE_DIR="http://127.0.0.1:8000"
+ 
+ const kBaseUrl=process.env.REACT_APP_BE_URL
 
 
  export const createOrder = (order) => async (dispatch, getState) =>{
@@ -39,17 +39,17 @@ import {
             }
         }
         
-        const { data } = await axios.post(
-            '/api/orders/add/',
-            order,
-            config
-        )
-
         // const { data } = await axios.post(
-        //     `${BASE_DIR}/api/orders/add/`,
+        //     '/api/orders/add/',
         //     order,
         //     config
         // )
+
+        const { data } = await axios.post(
+            `${kBaseUrl}/api/orders/add/`,
+            order,
+            config
+        )
 
         dispatch({
             type: ORDER_CREATE_SUCCESS,
@@ -92,14 +92,14 @@ import {
             }
         }
         
-        const { data } = await axios.get(
-            `/api/orders/${id}/`,
-            config
-        )
         // const { data } = await axios.get(
-        //     `${BASE_DIR}/api/orders/${id}/`,
+        //     `/api/orders/${id}/`,
         //     config
         // )
+        const { data } = await axios.get(
+            `${kBaseUrl}/api/orders/${id}/`,
+            config
+        )
 
         dispatch({
             type: ORDER_DETAILS_SUCCESS,
@@ -138,10 +138,10 @@ import {
             }
         }
 
-        const { data } = await axios.put(
-            `/api/orders/${id}/pay/`,
-            config
-        )
+        // const { data } = await axios.put(
+        //     `/api/orders/${id}/pay/`,
+        //     config
+        // )
 
         //before stripe integration
         // const { data } = await axios.put(
@@ -150,10 +150,10 @@ import {
         // )
 
 
-        // const { data } = await axios.put(
-        //     `${BASE_DIR}/api/orders/${id}/pay/`,
-        //     config
-        // )
+        const { data } = await axios.put(
+            `${kBaseUrl}/api/orders/${id}/pay/`,
+            config
+        )
 
         dispatch({
             type: ORDER_PAY_SUCCESS,
@@ -189,14 +189,14 @@ import {
             }
         }
         
-        const { data } = await axios.get(
-            `/api/orders/myorders/`,
-            config
-        )
         // const { data } = await axios.get(
-        //     `${BASE_DIR}/api/orders/myorders/`,
+        //     `/api/orders/myorders/`,
         //     config
         // )
+        const { data } = await axios.get(
+            `${kBaseUrl}/api/orders/myorders/`,
+            config
+        )
 
         dispatch({
             type: ORDER_LIST_MY_SUCCESS,

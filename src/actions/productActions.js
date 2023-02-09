@@ -15,13 +15,15 @@ import {
 
 // const BASE_DIR="http://127.0.0.1:8000"
 
+const kBaseUrl=process.env.REACT_APP_BE_URL
+
  export const listProducts = () => async (dispatch) => {
     
     try{
         dispatch({ type: PRODUCT_LIST_REQUEST })
 
-        const { data } = await axios.get('/api/products')
-        // const { data } = await axios.get(`${BASE_DIR}/api/products`)
+        // const { data } = await axios.get('/api/products')
+        const { data } = await axios.get(`${kBaseUrl}/api/products`)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -42,9 +44,9 @@ import {
     try{
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`/api/products/${id}`)
+        // const { data } = await axios.get(`/api/products/${id}`)
 
-        // const { data } = await axios.get(`${BASE_DIR}/api/products/${id}`)
+        const { data } = await axios.get(`${kBaseUrl}/api/products/${id}`)
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,

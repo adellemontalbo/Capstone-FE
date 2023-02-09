@@ -6,10 +6,11 @@ import { CART_ADD_ITEM,
 } from '../constants/cartConstants'
 
 // const BASE_DIR="http://127.0.0.1:8000"
+const kBaseUrl=process.env.REACT_APP_BE_URL
 
 export const addToCart = (id, qty) => async (dispatch, getState) => { 
-    // const {data} = await axios.get(`${BASE_DIR}/api/products/${id}`)
-    const {data} = await axios.get(`/api/products/${id}`)
+    const {data} = await axios.get(`${kBaseUrl}/api/products/${id}`)
+    // const {data} = await axios.get(`/api/products/${id}`)
 
     dispatch({
         type: CART_ADD_ITEM,
