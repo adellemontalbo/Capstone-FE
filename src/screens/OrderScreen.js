@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import { getOrderDetails } from '../actions/orderActions'
 
 
+
 function OrderScreen() {
     const navigate = useNavigate()
     const { id } = useParams();
@@ -27,12 +28,6 @@ function OrderScreen() {
         }
     }, [dispatch, order, id])
 
-    // return(
-    //     <div>
-    //         {/* <h1>{order.id}</h1> */}
-    //         OrderScreen
-    //     </div>
-    // ) }
 
 
     return loading ? (
