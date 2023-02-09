@@ -5,7 +5,10 @@ import { CART_ADD_ITEM,
     CART_SAVE_PAYMENT_METHOD 
 } from '../constants/cartConstants'
 
+// const BASE_DIR="http://127.0.0.1:8000"
+
 export const addToCart = (id, qty) => async (dispatch, getState) => { 
+    // const {data} = await axios.get(`${BASE_DIR}/api/products/${id}`)
     const {data} = await axios.get(`/api/products/${id}`)
 
     dispatch({

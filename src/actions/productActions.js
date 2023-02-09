@@ -12,11 +12,16 @@ import {
  // here we fire off our first reducers
  //if everything goes correctly, we dispatch our success call
  //if we have a custom error message we'll use that, if not we'll use our generic one
+
+// const BASE_DIR="http://127.0.0.1:8000"
+
  export const listProducts = () => async (dispatch) => {
+    
     try{
         dispatch({ type: PRODUCT_LIST_REQUEST })
 
         const { data } = await axios.get('/api/products')
+        // const { data } = await axios.get(`${BASE_DIR}/api/products`)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -38,6 +43,8 @@ import {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
         const { data } = await axios.get(`/api/products/${id}`)
+
+        // const { data } = await axios.get(`${BASE_DIR}/api/products/${id}`)
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,

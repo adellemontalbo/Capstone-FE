@@ -18,6 +18,8 @@ import {
 
  import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
 
+//  const BASE_DIR="http://127.0.0.1:8000"
+
 
  export const createOrder = (order) => async (dispatch, getState) =>{
     try {
@@ -42,6 +44,12 @@ import {
             order,
             config
         )
+
+        // const { data } = await axios.post(
+        //     `${BASE_DIR}/api/orders/add/`,
+        //     order,
+        //     config
+        // )
 
         dispatch({
             type: ORDER_CREATE_SUCCESS,
@@ -88,6 +96,10 @@ import {
             `/api/orders/${id}/`,
             config
         )
+        // const { data } = await axios.get(
+        //     `${BASE_DIR}/api/orders/${id}/`,
+        //     config
+        // )
 
         dispatch({
             type: ORDER_DETAILS_SUCCESS,
@@ -105,7 +117,10 @@ import {
 
  }
 
- export const payOrder = (id, paymentResult) => async (dispatch, getState) =>{
+//  Before stripe integration it was like this:
+//  export const payOrder = (id, paymentResult) 
+
+ export const payOrder = (id) => async (dispatch, getState) =>{
     try {
         dispatch({
             type: ORDER_PAY_REQUEST
@@ -122,11 +137,23 @@ import {
 
             }
         }
-        
+
         const { data } = await axios.put(
-            `/api/orders/${id}/pay/`, paymentResult,
+            `/api/orders/${id}/pay/`,
             config
         )
+
+        //before stripe integration
+        // const { data } = await axios.put(
+        //     `/api/orders/${id}/pay/`, paymentResult,
+        //     config
+        // )
+
+
+        // const { data } = await axios.put(
+        //     `${BASE_DIR}/api/orders/${id}/pay/`,
+        //     config
+        // )
 
         dispatch({
             type: ORDER_PAY_SUCCESS,
@@ -166,6 +193,10 @@ import {
             `/api/orders/myorders/`,
             config
         )
+        // const { data } = await axios.get(
+        //     `${BASE_DIR}/api/orders/myorders/`,
+        //     config
+        // )
 
         dispatch({
             type: ORDER_LIST_MY_SUCCESS,
