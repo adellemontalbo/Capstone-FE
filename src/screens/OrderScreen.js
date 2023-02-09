@@ -4,11 +4,17 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails } from '../actions/orderActions'
+import { getOrderDetails, payOrder } from '../actions/orderActions'
+
+import getStripe from '../actions/getStripe'
+
+
 
 
 
 function OrderScreen() {
+
+
     const navigate = useNavigate()
     const { id } = useParams();
     const dispatch = useDispatch()
@@ -16,19 +22,54 @@ function OrderScreen() {
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, error, loading } = orderDetails
 
+    const orderPay = useSelector(state => state.orderPay)
+    const { loading: loadingPay, success: successPay } = orderPay
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
 
     if (!loading && !error) {
         order.itemsPrice = order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
     }
+
+    // const addStripeScript = () => {
+    //     const script = document.createElement('script')
+    //     script.type = 'text/javascript'
+    //     script.src = 'src="https://js.stripe.com/v3"'
+    //     script.async = true
+    //     script.onload = () => {
+    //         setSdkReady(true)
+    //     const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx')
+    //     }
+    //     document.body.appendChild(script)
+    // }
+
+    // useEffect(() => {
+
+    
+    //     if (!order || successPay || order._id !== Number(order.id)) {
+    //         dispatch({ type: ORDER_PAY_RESET })
+
+    //         dispatch(getOrderDetails(order.id))
+      
+    //         addStripeScript()
+       
+    //     }
+    // }, [dispatch, order, order.id, successPay])
+
 
 
     useEffect(() => {
         if (!order || order.id !== Number(id)) {
             dispatch(getOrderDetails(id))
         }
-    }, [dispatch, order, id])
+    }, [dispatch, order, id, successPay])
 
-
+    const handleCheckout = () => {
+        getStripe()
+        dispatch(payOrder(order.id))
+    }
 
     return loading ? (
         <Loader />
@@ -53,11 +94,6 @@ function OrderScreen() {
                                         {order.shippingAddress.country}
                                     </p>
 
-                                    {order.isDelivered ? (
-                                        <Message variant='success'>Delivered on {order.deliveredAt}</Message>
-                                    ) : (
-                                            <Message variant='warning'>Not Delivered</Message>
-                                        )}
                                 </ListGroup.Item>
 
                                 <ListGroup.Item>
@@ -66,7 +102,7 @@ function OrderScreen() {
                                         <strong>Method: </strong>
                                         {order.paymentMethod}
                                     </p>
-                                    {order.isPaid ? (
+                                    {orderPay.success ? (
                                         <Message variant='success'>This order has been paid for</Message>
                                     ) : (
                                             <Message variant='warning'>This order has not been paid for</Message>
@@ -139,7 +175,12 @@ function OrderScreen() {
                                             <Col>${order.totalPrice}</Col>
                                         </Row>
                                     </ListGroup.Item>
-                                </ListGroup>
+                                   
+                                    <ListGroup.Item>
+                                    <button type="button" className="btn btn-primary" onClick={handleCheckout}>Make payment</button>
+                                    </ListGroup.Item>
+                                               
+                                 </ListGroup>
                             </Card>
                         </Col>
                     </Row>
@@ -148,3 +189,23 @@ function OrderScreen() {
 }
 
 export default OrderScreen
+
+
+
+
+// {order.isDelivered ? (
+//     <Message variant='success'>Delivered on {order.deliveredAt}</Message>
+// ) : (
+//         <Message variant='warning'>Not Delivered</Message>
+//     )}
+
+// {!order.isPaid && (
+//     <ListGroup.Item>
+//         {loadingPay && <Loader />}
+
+//         {!sdkReady ? (
+//             <Loader />
+//         ) : (
+//             <button type="button" className="btn btn-primary" onClick={handleCheckout}>Make payment</button>
+//             )}
+//     </ListGroup.Item>)}
