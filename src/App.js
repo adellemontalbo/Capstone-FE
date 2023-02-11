@@ -36,7 +36,8 @@ function App() {
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/placeorder' element={<PlaceOrderScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
-            <Route path='/order/:id' element={<OrderScreen />} />
+            {/* <Route path='/order/:id' element={<OrderScreen />} /> */}
+            <Route path='/order/1' element={<OrderScreen />} />
             <Route path='/login' element={<LoginScreen />}/>
             <Route path='/register' element={<RegisterScreen />} />
           </Routes>

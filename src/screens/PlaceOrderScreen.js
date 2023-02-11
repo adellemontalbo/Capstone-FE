@@ -37,18 +37,23 @@ function PlaceOrderScreen() {
         }
     }, [success, navigate ])
 
+//changed her for demo
     const placeOrder = () => {
-        dispatch(createOrder({
-            orderItems: cart.cartItems,
-            shippingAddress: cart.shippingAddress,
-            paymentMethod: cart.paymentMethod,
-            itemsPrice: cart.itemsPrice,
-            shippingPrice: cart.shippingPrice,
-            taxPrice: cart.taxPrice,
-            totalPrice: cart.totalPrice
-        }))
-        console.log('Order placed')
+        navigate(`/order/1`)
     }
+
+    // const placeOrder = () => {
+    //     dispatch(createOrder({
+    //         orderItems: cart.cartItems,
+    //         shippingAddress: cart.shippingAddress,
+    //         paymentMethod: cart.paymentMethod,
+    //         itemsPrice: cart.itemsPrice,
+    //         shippingPrice: cart.shippingPrice,
+    //         taxPrice: cart.taxPrice,
+    //         totalPrice: cart.totalPrice
+    //     }))
+    //     console.log('Order placed')
+    // }
 
     // console.log(`this is my order:${order.id}`)
     
