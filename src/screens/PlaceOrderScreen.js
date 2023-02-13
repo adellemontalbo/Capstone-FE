@@ -148,7 +148,7 @@ function PlaceOrderScreen() {
                             </ListGroup.Item>
 
                             <ListGroup.Item>
-                                    {error && <Message variant='danger'>"You must be logged in to place an order"</Message>}
+                                    {error && <Message variant='danger'>You must be logged in to place an order</Message>}
                             </ListGroup.Item>
 
                             <ListGroup.Item>
