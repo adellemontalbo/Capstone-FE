@@ -11,7 +11,15 @@ function HomeScreen() {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)
     const { error, loading, products } = productList
-        
+
+    // for (const product in products){
+    // if (product.id === 3){
+    //         product.image = 'https://images.pexels.com/photos/13119203/pexels-photo-13119203.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'
+    //     }
+    // }
+    
+
+
     useEffect(()=>{
         dispatch(listProducts())
 
